@@ -1,10 +1,16 @@
 import subprocess
 import time
 import platform
+from googletrans import Translator
+
+def translate_message(message):
+    translator = Translator()
+    translation = translator.translate(message, src='ja', dest='en')
+    return translation.text
 
 def Reincarnation():
     print("Confirm to start a new life.")
-    input_val = input("Please enter 'y' to confirm: ")
+    input_val = input("Please enter 'y' to confirm (yes/いいえ): ")
     
     if input_val.lower() == 'y':
         if platform.system() == "Windows":
@@ -19,11 +25,11 @@ def Reincarnation():
         exit()
 
 def transmigration():
-    print("You are transmigrating to another world. Initiating transmigration in 10 seconds...")
+    print("You are transmigrating to another world. Initiating transmigration in 10 seconds (10 秒待ってください)...")
     for i in range(10, 0, -1):
-        print(f"Transmigration in {i} seconds...", end="\r")
+        print(f"Transmigration in {i} seconds (残り {i} 秒)...", end="\r")
         time.sleep(1)
-    print("Transmigrating now!")
+    print("Transmigrating now (転生中)!")
     if platform.system() == "Windows":
         subprocess.run(["shutdown", "/r", "/t", "0", "/f"], check=True)
     elif platform.system() == "Darwin" or platform.system() == "Linux":
@@ -32,16 +38,28 @@ def transmigration():
         print("Unsupported operating system.")
 
 def summoning():
-    print("You are too weak for the summoning and you died, going tho restart life.")
+    print("You are too weak for the summoning and you died, going to restart life (召喚には弱すぎて死んでしまいました、人生を再起動します).")
     time.sleep(2)  # Wait for 2 seconds
     restart_life()
 
+def translate_all_messages():
+    print("\nTranslating all Japanese messages to English...")
+    time.sleep(1)
+    print("\nReincarnation: ", translate_message("転生"))
+    print("Transmigration: ", translate_message("転移"))
+    print("Summoning: ", translate_message("召喚"))
+    print("Initiating transmigration in 10 seconds: ", translate_message("10 秒待ってください"))
+    print("Transmigrating now: ", translate_message("転生中"))
+    print("You are too weak for the summoning: ", translate_message("召喚には弱すぎて"))
+    print("Confirm to start a new life: ", translate_message("新しい人生を始めることを確認します"))
+    print("\n")
+
 if __name__ == "__main__":
-    print("Welcome to the Life Restart Program.")
+    print("Welcome to the Life Restart Program (人生リスタートプログラムへようこそ).")
     print("Choose an option:")
-    print("1. Reincarnation")
-    print("2. Transmigration")
-    print("3. Summoning")
+    print("1. Reincarnation (転生)")
+    print("2. Transmigration (転移)")
+    print("3. Summoning (召喚)")
     
     choice = input("Enter your choice (1/2/3): ")
     
@@ -51,6 +69,7 @@ if __name__ == "__main__":
         transmigration()
     elif choice == '3':
         summoning()
+    elif choice == '4':
+        translate_all_messages()
     else:
         print("Invalid choice. Please select 1, 2, or 3.")
-        
