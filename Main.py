@@ -51,16 +51,18 @@ def summoning():
     time.sleep(2)  # Wait for 2 seconds
     restart_life()
 
-if __name__ == "__main__":
+def restart_life():
     print("Welcome to the Life Restart Program (人生リスタートプログラムへようこそ).")
     print("Choose an option:")
     print("1. Reincarnation (転生)")
     print("2. Transmigration (転移)")
     print("3. Summoning (召喚)")
     print("4. Translate All Messages")
-    
+    choice()
+
+def choice():
     choice = input("Enter your choice (1/2/3): ")
-    
+
     if choice == '1':
         Reincarnation()
     elif choice == '2':
@@ -71,3 +73,7 @@ if __name__ == "__main__":
         translate_all_messages()
     else:
         print("Invalid choice. Please select 1, 2, 3, or 4 :)")
+        choice()# Restart the program if the choice is invalid
+
+if __name__ == "__main__":
+    restart_life()
