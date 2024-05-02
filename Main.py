@@ -1,4 +1,4 @@
-import os
+import subprocess
 import time
 import platform
 
@@ -8,9 +8,9 @@ def restart_life():
     
     if input_val.lower() == 'y':
         if platform.system() == "Windows":
-            os.system("shutdown /r /t 1")
+            subprocess.run(["shutdown", "/r", "/t", "1"], check=True)
         elif platform.system() == "Darwin" or platform.system() == "Linux":
-            os.system("sudo shutdown now")
+            subprocess.run(["sudo", "shutdown", "now"], check=True)
         else:
             print("Unsupported operating system.")
     else:
@@ -23,9 +23,9 @@ def transmigration():
         time.sleep(1)
     print("Transmigrating now!")
     if platform.system() == "Windows":
-        os.system("shutdown -t 0 -r -f")
+        subprocess.run(["shutdown", "/r", "/t", "0", "/f"], check=True)
     elif platform.system() == "Darwin" or platform.system() == "Linux":
-        os.system("sudo reboot now")
+        subprocess.run(["sudo", "reboot", "now"], check=True)
     else:
         print("Unsupported operating system.")
 
