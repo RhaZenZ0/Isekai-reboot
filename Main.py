@@ -2,7 +2,7 @@ import subprocess
 import time
 import platform
 
-def restart_life():
+def Reincarnation():
     print("Confirm to start a new life.")
     input_val = input("Please enter 'y' to confirm: ")
     
@@ -14,6 +14,8 @@ def restart_life():
         else:
             print("Unsupported operating system.")
     else:
+        print("There's no kami in the vicinity, reincarnation aborted!")
+        time.sleep(2)  # Wait for 2 seconds
         exit()
 
 def transmigration():
@@ -30,20 +32,21 @@ def transmigration():
         print("Unsupported operating system.")
 
 def summoning():
-    print("You are too weak for the summoning. Choosing to restart life.")
+    print("You are too weak for the summoning and you died, going tho restart life.")
+    time.sleep(2)  # Wait for 2 seconds
     restart_life()
 
 if __name__ == "__main__":
     print("Welcome to the Life Restart Program.")
     print("Choose an option:")
-    print("1. Restart Life")
+    print("1. Reincarnation")
     print("2. Transmigration")
     print("3. Summoning")
     
     choice = input("Enter your choice (1/2/3): ")
     
     if choice == '1':
-        restart_life()
+        Reincarnation()
     elif choice == '2':
         transmigration()
     elif choice == '3':
