@@ -1,12 +1,18 @@
 import os
 import time
+import platform
 
 def restart_life():
     print("Confirm to start a new life.")
     input_val = input("Please enter 'y' to confirm: ")
     
     if input_val.lower() == 'y':
-        os.system("shutdown /r /t 1")
+        if platform.system() == "Windows":
+            os.system("shutdown /r /t 1")
+        elif platform.system() == "Darwin" or platform.system() == "Linux":
+            os.system("sudo shutdown now")
+        else:
+            print("Unsupported operating system.")
     else:
         exit()
 
@@ -16,7 +22,12 @@ def transmigration():
         print(f"Transmigration in {i} seconds...", end="\r")
         time.sleep(1)
     print("Transmigrating now!")
-    os.system("shutdown -t 0 -r -f")  # Modified command to shutdown immediately
+    if platform.system() == "Windows":
+        os.system("shutdown -t 0 -r -f")
+    elif platform.system() == "Darwin" or platform.system() == "Linux":
+        os.system("sudo reboot now")
+    else:
+        print("Unsupported operating system.")
 
 def summoning():
     print("You are too weak for the summoning. Choosing to restart life.")
@@ -39,4 +50,4 @@ if __name__ == "__main__":
         summoning()
     else:
         print("Invalid choice. Please select 1, 2, or 3.")
-      
+        
