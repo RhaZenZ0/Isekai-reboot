@@ -12,8 +12,10 @@ translations = {
     "新しい人生を始めることを確認します": "Confirm to start a new life"
 }
 
-def translate_message(message):
-    return translations.get(message, message)
+def translate_all_messages():
+    print("Translations:")
+    for message, translation in translations.items():
+        print(f"{message}: {translate_message(message)}")
 
 def Reincarnation():
     print("Confirm to start a new life.")
@@ -55,6 +57,7 @@ if __name__ == "__main__":
     print("1. Reincarnation (転生)")
     print("2. Transmigration (転移)")
     print("3. Summoning (召喚)")
+    print("4. Translate All Messages")
     
     choice = input("Enter your choice (1/2/3): ")
     
@@ -67,4 +70,4 @@ if __name__ == "__main__":
     elif choice == '4':
         translate_all_messages()
     else:
-        print("Invalid choice. Please select 1, 2, or 3.")
+        print("Invalid choice. Please select 1, 2, 3, or 4 :)")
