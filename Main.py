@@ -1,12 +1,19 @@
 import subprocess
 import time
 import platform
-from googletrans import Translator
+
+translations = {
+    "転生": "Reincarnation",
+    "転移": "Transmigration",
+    "召喚": "Summoning",
+    "10 秒待ってください": "Initiating transmigration in 10 seconds",
+    "転生中": "Transmigrating now",
+    "召喚には弱すぎて": "You are too weak for the summoning",
+    "新しい人生を始めることを確認します": "Confirm to start a new life"
+}
 
 def translate_message(message):
-    translator = Translator()
-    translation = translator.translate(message, src='ja', dest='en')
-    return translation.text
+    return translations.get(message, message)
 
 def Reincarnation():
     print("Confirm to start a new life.")
@@ -41,18 +48,6 @@ def summoning():
     print("You are too weak for the summoning and you died, going to restart life (召喚には弱すぎて死んでしまいました、人生を再起動します).")
     time.sleep(2)  # Wait for 2 seconds
     restart_life()
-
-def translate_all_messages():
-    print("\nTranslating all Japanese messages to English...")
-    time.sleep(1)
-    print("\nReincarnation: ", translate_message("転生"))
-    print("Transmigration: ", translate_message("転移"))
-    print("Summoning: ", translate_message("召喚"))
-    print("Initiating transmigration in 10 seconds: ", translate_message("10 秒待ってください"))
-    print("Transmigrating now: ", translate_message("転生中"))
-    print("You are too weak for the summoning: ", translate_message("召喚には弱すぎて"))
-    print("Confirm to start a new life: ", translate_message("新しい人生を始めることを確認します"))
-    print("\n")
 
 if __name__ == "__main__":
     print("Welcome to the Life Restart Program (人生リスタートプログラムへようこそ).")
