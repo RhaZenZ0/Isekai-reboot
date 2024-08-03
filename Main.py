@@ -15,65 +15,100 @@ translations = {
 def translate_all_messages():
     print("Translations:")
     for message, translation in translations.items():
-        print(f"{message}: {translate_message(message)}")
+        print(f"{message}: {translation}")
+    print("\nNo need for Google Translate, you've got me!")
+
+def confirm_action(action_name):
+    confirmation = input(f"Are you sure you want to proceed with {action_name}? (y/n): ")
+    if confirmation.lower() == 'y':
+        print("Alright, hold on to your circuits, this might get wild!")
+    else:
+        print("Good call! I was worried you might regret it.")
+    return confirmation.lower() == 'y'
 
 def Reincarnation():
     print("Confirm to start a new life.")
-    input_val = input("Please enter 'y' to confirm (yes/いいえ): ")
-    
-    if input_val.lower() == 'y':
-        if platform.system() == "Windows":
-            subprocess.run(["shutdown", "/r", "/t", "1"], check=True)
-        elif platform.system() == "Darwin" or platform.system() == "Linux":
-            subprocess.run(["sudo", "shutdown", "now"], check=True)
-        else:
-            print("Unsupported operating system.")
+    if confirm_action("Reincarnation"):
+        print("Reincarnation in progress... Hope you enjoy your new life. Avoid becoming a slime this time!")
+        execute_system_command("Reincarnation", ["shutdown", "/r", "/t", "1"], ["sudo", "shutdown", "now"])
     else:
-        print("There's no kami in the vicinity, reincarnation aborted!")
-        time.sleep(2)  # Wait for 2 seconds
-        exit()
+        print("Reincarnation aborted! Guess the afterlife isn’t all it's cracked up to be.")
 
 def transmigration():
-    print("You are transmigrating to another world. Initiating transmigration in 10 seconds (10 秒待ってください)...")
+    print("You are transmigrating to another world. Initiating transmigration in 10 seconds...")
     for i in range(10, 0, -1):
-        print(f"Transmigration in {i} seconds (残り {i} 秒)...", end="\r")
+        print(f"Transmigration in {i} seconds... Use this time to remember your last 'isekai' adventure!", end="\r")
         time.sleep(1)
-    print("Transmigrating now (転生中)!")
-    if platform.system() == "Windows":
-        subprocess.run(["shutdown", "/r", "/t", "0", "/f"], check=True)
-    elif platform.system() == "Darwin" or platform.system() == "Linux":
-        subprocess.run(["sudo", "reboot", "now"], check=True)
-    else:
-        print("Unsupported operating system.")
+    print("\nTransmigrating now! Hope you end up in a world with overpowered abilities!")
+    execute_system_command("Transmigration", ["shutdown", "/r", "/t", "0", "/f"], ["sudo", "reboot", "now"])
 
 def summoning():
-    print("You are too weak for the summoning and you died, going to restart life (召喚には弱すぎて死んでしまいました、人生を再起動します).")
-    time.sleep(2)  # Wait for 2 seconds
+    print("You are too weak for the summoning and you died... Ouch, that was fast. Restarting life now!")
+    time.sleep(2)
     restart_life()
 
-def restart_life():
-    print("Welcome to the Life Restart Program (人生リスタートプログラムへようこそ).")
-    print("Choose an option:")
-    print("1. Reincarnation (転生)")
-    print("2. Transmigration (転移)")
-    print("3. Summoning (召喚)")
-    print("4. Translate All Messages")
-    choice()
-
-def choice():
-    choice = input("Enter your choice (1/2/3): ")
-
-    if choice == '1':
-        Reincarnation()
-    elif choice == '2':
-        transmigration()
-    elif choice == '3':
-        summoning()
-    elif choice == '4':
-        translate_all_messages()
+def execute_system_command(action_name, windows_cmd, unix_cmd):
+    if confirm_action(action_name):
+        try:
+            if platform.system() == "Windows":
+                subprocess.run(windows_cmd, check=True)
+            elif platform.system() == "Darwin" or platform.system() == "Linux":
+                subprocess.run(unix_cmd, check=True)
+            else:
+                print("Unsupported operating system. Maybe try running this on an enchanted scroll?")
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to execute {action_name}: {e}")
     else:
-        print("Invalid choice. Please select 1, 2, 3, or 4 :)")
-        choice()# Restart the program if the choice is invalid
+        print(f"{action_name} aborted. I was just getting ready to summon the dragons...")
+
+def take_a_break():
+    print("Taking a break... How about a cup of coffee?")
+    if platform.system() == "Windows":
+        subprocess.run(["timeout", "5"], check=True)
+    elif platform.system() == "Darwin" or platform.system() == "Linux":
+        subprocess.run(["sleep", "5"], check=True)
+    print("Break over! Hope you’re recharged and ready to tackle the next task.")
+
+def check_status():
+    print("Checking system status... This won’t hurt a bit.")
+    if platform.system() == "Windows":
+        subprocess.run(["systeminfo"], check=True)
+    elif platform.system() == "Darwin" or platform.system() == "Linux":
+        subprocess.run(["uname", "-a"], check=True)
+    print("Status check complete. Everything looks good on my end!")
+
+def restart_life():
+    print("Welcome to the Life Restart Program. It's like hitting Ctrl+Z on reality.")
+    print("Choose an option:")
+    print("1. Reincarnation - Press F5 on your existence.")
+    print("2. Transmigration - Travel to another world. Don't forget your passport!")
+    print("3. Summoning - Let’s hope you’re the hero, not the cannon fodder.")
+    print("4. Translate All Messages - Because who needs Rosetta Stone?")
+    print("5. Take a Break - Because even heroes need rest.")
+    print("6. Check Status - For a quick health check of your current realm.")
+    main_loop()
+
+def main_loop():
+    while True:
+        choice = input("Enter your choice (1/2/3/4/5/6): ")
+
+        if choice == '1':
+            Reincarnation()
+            break
+        elif choice == '2':
+            transmigration()
+            break
+        elif choice == '3':
+            summoning()
+            break
+        elif choice == '4':
+            translate_all_messages()
+        elif choice == '5':
+            take_a_break()
+        elif choice == '6':
+            check_status()
+        else:
+            print("Invalid choice. Select 1, 2, 3, 4, 5, or 6. This isn’t rocket science... Or is it?")
 
 if __name__ == "__main__":
     restart_life()
